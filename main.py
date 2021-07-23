@@ -24,15 +24,13 @@ async def on_message(message):
     await message.channel.send(random.randint(0,number))
   elif message.content.startswith('#walterball'):
     await message.channel.send(walterBall[random.randint(0,len(walterBall))])
-  elif lower(message.content).startswith(responses[3]):
+  elif message.content.lower().startswith(responses[3]):
     await message.channel.send(resline)
-  elif lower(message.content).startswith('i like fire trucks and moster trucks'):
-    await message.channel.send(resline)
-  elif lower(message.content).startswith('i like fire trucks'):
+  elif message.content.lower().startswith('i like fire trucks'):
     await message.channel.send(trucks[1])
-  elif lower(message.content).startswith('i like moster trucks'):
+  elif message.content.lower().startswith('i like moster trucks'):
     await message.channel.send(trucks[0])
-  elif "walter" in lower(message.content):
+  elif "walter" in message.content.lower():
     await message.channel.send('walter')
 
 

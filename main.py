@@ -21,11 +21,11 @@ async def on_message(message):
     await message.channel.send(resline)
   elif message.content.startswith('#'):
     tempstring = message.content.split('#')[1]
-    realstring = tempstring.split()[0]
-    if realstring.lower() == 'roll':
+    realstring = tempstring.split()[0].lower()
+    if realstring == 'roll':
       number = int(message.content.split('#roll',1)[1])
       await message.channel.send(random.randint(0,number))
-    elif realstring.lower() == 'walterball':
+    elif realstring == 'walterball':
       await message.channel.send(walterBall[random.randint(0,len(walterBall))])
   elif message.content.lower().startswith(responses[3]):
     await message.channel.send(resline)

@@ -17,13 +17,13 @@ async def on_message(message):
   resline = responses[random.randint(0,3)]
   if message.author == client.user:
     return 
-  if message.content.startswith('#walterBall'):
-    await message.channel.send(walterBall[random.randint(0,len(walterBall))])
-  if message.content.startswith('#roll'):
-    number = int(message.content.split('#roll',1)[1])
-    await message.channel.send(random.randint(0,number))
   if random.randint(0, 100) == 69:
     await message.channel.send(resline)
+  elif message.content.startswith('#roll'):
+    number = int(message.content.split('#roll',1)[1])
+    await message.channel.send(random.randint(0,number))
+  elif message.content.startswith('#walterBall'):
+    await message.channel.send(walterBall[random.randint(0,len(walterBall))])
   elif message.content.startswith(responses[3]):
     await message.channel.send(resline)
   elif message.content.startswith('I like fire trucks and moster trucks'):

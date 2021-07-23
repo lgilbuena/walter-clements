@@ -12,18 +12,26 @@ async def on_ready():
 
 @client.event
 async def on_message(message):
+  resline = responses[random.randint(0,3)]
   if message.author == client.user:
     return 
   if message.content.startswith('#roll'):
-    await message.channel.send('hello')
+    number = int(message.content.split('#roll',1)[1])
+    await message.channel.send('hello',number)
   if random.randint(0, 100) == 69:
-    await message.channel.send(responses[random.randint(0,3)])
+    await message.channel.send(resline)
   elif message.content.startswith('i like fire trucks'):
     await message.channel.send(trucks[1])
   elif message.content.startswith('i like moster trucks'):
     await message.channel.send(trucks[0])
+  elif message.content.startswith('I like fire trucks'):
+    await message.channel.send(trucks[1])
+  elif message.content.startswith('I like moster trucks'):
+    await message.channel.send(trucks[0])
   elif "walter" in message.content:
-    await message.channel.send(responses[0])
+    await message.channel.send(resline)
+  elif "Walter" in message.content:
+    await message.channel.send(resline)
 
 
 client.run('ODY3OTA4MDkxNzMwMDY3NDg2.YPn8Zg.gIXF9-pJYieVZjKF5CzRR9Ug_ys')

@@ -15,7 +15,6 @@ async def on_message(message):
   if message.author == client.user:
     return 
   if message.content.startswith('#roll'):
-    number = int(message.content.split("#roll,1")[1])
     await message.channel.send('hello')
   if random.randint(0, 100) == 69:
     await message.channel.send(responses[random.randint(0,3)])

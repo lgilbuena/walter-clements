@@ -14,6 +14,9 @@ async def on_ready():
 async def on_message(message):
   if message.author == client.user:
     return 
+  if message.content.startswith('#roll'):
+    number = int(message.content.split("#roll,1")[1])
+    await message.channel.send('hello')
   if random.randint(0, 100) == 69:
     await message.channel.send(responses[random.randint(0,3)])
   elif message.content.startswith('i like fire trucks'):
@@ -22,9 +25,6 @@ async def on_message(message):
     await message.channel.send(trucks[0])
   elif "walter" in message.content:
     await message.channel.send(responses[0])
-  if message.content.startswith('#roll'):
-    number = int(message.content.split("#roll,1")[1])
-    await message.channel.send('hello')
 
 
 client.run('ODY3OTA4MDkxNzMwMDY3NDg2.YPn8Zg.gIXF9-pJYieVZjKF5CzRR9Ug_ys')

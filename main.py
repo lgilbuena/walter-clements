@@ -22,10 +22,10 @@ async def on_message(message):
   elif message.content.startswith('#'):
     tempstring = message.content.split('#')[1]
     realstring = tempstring.split()[0].lower()
-    if "roll" in realstring:
+    if message.content.lower().startswith('#roll'):
       number = int(message.content.split('#roll',1)[1])
       await message.channel.send(random.randint(0,number))
-    elif "walterball" in realstring:
+    elif message.content.lower().startswith('#walterball')::
       await message.channel.send(walterBall[random.randint(0,len(walterBall))])
   elif message.content.lower().startswith(responses[3]):
     await message.channel.send(resline)

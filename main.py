@@ -20,6 +20,10 @@ async def on_message(message):
     await message.channel.send(random.randint(0,number))
   if random.randint(0, 100) == 69:
     await message.channel.send(resline)
+  elif message.content.startswith(responses[3]):
+    await message.channel.send(resline)
+  elif message.content.startswith('I like fire trucks and moster trucks'):
+    await message.channel.send(resline)
   elif message.content.startswith('i like fire trucks'):
     await message.channel.send(trucks[1])
   elif message.content.startswith('i like moster trucks'):
@@ -28,10 +32,6 @@ async def on_message(message):
     await message.channel.send(trucks[1])
   elif message.content.startswith('I like moster trucks'):
     await message.channel.send(trucks[0])
-  elif message.content.startswith(responses[3]):
-    await message.channel.send(resline)
-  elif message.content.startswith('I like fire trucks and moster trucks'):
-    await message.channel.send(resline)
   elif "walter" in message.content:
     await message.channel.send('walter')
   elif "Walter" in message.content:

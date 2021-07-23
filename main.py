@@ -17,7 +17,7 @@ async def on_message(message):
     return 
   if message.content.startswith('#roll'):
     number = int(message.content.split('#roll',1)[1])
-    await message.channel.send(number)
+    await message.channel.send(random.randint(0,number))
   if random.randint(0, 100) == 69:
     await message.channel.send(resline)
   elif message.content.startswith('i like fire trucks'):

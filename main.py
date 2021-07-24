@@ -24,7 +24,7 @@ async def on_message(message):
     realstring = tempstring.split()[0].lower()
     if "roll" in realstring:
       number = int(message.content.split('#roll',1)[1])
-      await message.channel.send(random.randint(0,number))
+      await message.channel.send(random.randint(1,number))
     elif "walterball" in realstring:
       await message.channel.send(walterBall[random.randint(0,len(walterBall))])
   elif message.content.lower().startswith(responses[3]):

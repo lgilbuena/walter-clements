@@ -10,10 +10,10 @@ walterBall = ['It is certain','It is decidedly so','Without a doubt','Yes, defin
 'Better not tell you now','Cannot predict now','Concentrate and ask again','Don''t count on it','My reply is no','My sources say no','Outlook not so good','Very doubtful','walter','i like fire trucks','i like moster trucks','i like fire trucks and moster trucks']
 @client.command(name='walterball')
 async def walterball(context,question):
-  await context.send(walterBall[random.randint(0,len(walterBall))])
+  await context.message.channel.send(walterBall[random.randint(0,len(walterBall))])
 @client.command(name='roll')
 async def roll(context, number):
-  await context.send(random.randint(1,number))
+  await context.message.channel.send(random.randint(1,number))
 
 
 @client.event

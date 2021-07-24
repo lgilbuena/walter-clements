@@ -13,7 +13,7 @@ async def walterball(context,question):
   await context.message.channel.send(walterBall[random.randint(0,len(walterBall))])
 @client.command(name='roll')
 async def roll(context, number):
-  await context.message.channel.send(random.randint(1,number))
+  await context.message.channel.send(random.randint(1,int(number)))
 
 
 @client.event

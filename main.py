@@ -42,7 +42,7 @@ async def on_message(message):
       await message.channel.send(trucks[0])
     elif "walter" in message.content.lower():
       await message.channel.send('walter')
-    await client.process_commands(message)
+  await client.process_commands(message)
 
 
 client.run('ODY3OTA4MDkxNzMwMDY3NDg2.YPn8Zg.gIXF9-pJYieVZjKF5CzRR9Ug_ys')

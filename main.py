@@ -75,7 +75,7 @@ async def blackjack(context):
         await context.send('The dealer has a total of '+str(sumList(dealerCards))+' with '+stateCards(dealerCards))
       await context.send('The dealer has a total of ' + str(sumList(dealerCards)))
       await context.send('You have a total of '+ str(sumList(playerCards))+' with ' + stateCards(playerCards))
-      if sumList(dealerCards) > sumList(playerCards):
+      if sumList(dealerCards) > sumList(playerCards) and sumList(dealerCards) <= 21:
         await context.send('Dealer wins')
         break
       else:

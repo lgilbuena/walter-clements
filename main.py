@@ -19,7 +19,31 @@ async def roll(context, number):
   await context.message.channel.send(random.randint(1,int(number)))
 @client.command(name='blackjack')
 async def blackjack(context):
-  await context.message.channel.send('development of blackjack is in process. walter')
+  dealerCards = []
+  playerCards = []
+  def sumList(deck):
+    sum = 0
+    for x in deck:
+        sum += x
+    return sum
+  def stateCards(deck):
+      outLine = ""
+      for x in range(len(deck)):
+          if x == len(deck)-1:
+              outLine += str(deck[x])
+          else:outLine += str(deck[x]) + ", "
+      return outLine
+
+
+  while len(dealerCards) != 2:
+      dealerCards.append(random.randint(1,11))
+      if len(dealerCards) == 2:
+          await context.channel.send('Dealer has:',dealerCards[0],'& X')
+
+  while len(playerCards) != 2:
+      playerCards.append(random.randint(1,11))
+      if len(playerCards) == 2:
+          await context.channel.send('You have:',playerCards[0],'&',playerCards[1],'(',sumList(playerCards),')')
 
 
 @client.event

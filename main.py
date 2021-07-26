@@ -70,23 +70,23 @@ async def blackjack(context):
         await context.send('Walter has a total of '+str(sumList(dealerCards))+' with '+stateCards(dealerCards))
       await context.send('Walter has a total of ' + str(sumList(dealerCards)))
       await context.send('You have a total of '+ str(sumList(playerCards))+' with ' + stateCards(playerCards))
-      if sumList(dealerCards) > sumList(playerCards) and sumList(dealerCards) <= 21:
+      if sumList(dealerCards) > sumList(playerCards) and sumList(dealerCards) < 21:
         await context.send('Walter wins')
         break
-      elif sumList(dealerCards) == sumList(playerCards) and sumList(dealerCards) <= 21:
+      elif sumList(dealerCards) == sumList(playerCards) and sumList(dealerCards) < 21:
         await context.send('Issa draw!')
+      elif sumList(dealerCards) > 21:
+        await context.send("Walter has busted!")
+      elif sumList(dealerCards) == 21:
+        await context.send('Walter has: ' + str(dealerCards[0]) + ' & ' + str(dealerCards[1]))
+        await context.send("Walter has 21 and wins!")
+      elif sumList(playerCards) > 21:
+        await context.send('You bust. Walter wins.')
+      elif sumList(playerCards) == 21:
+        await context.send('You have blackjack! You win!')
       else:
         await context.send('You win!')
         break
-  if sumList(dealerCards) == 21:
-      await context.send('Walter has: ' + str(dealerCards[0]) + ' & ' + str(dealerCards[1]))
-      await context.send("Walter has 21 and wins!")
-  elif sumList(dealerCards) > 21:
-      await context.send("Walter has busted!")
-  if sumList(playerCards) > 21:
-    await context.send('You bust. Walter wins.')
-  elif sumList(playerCards) == 21:
-    await context.send('You have blackjack! You win!')
 
 @client.event
 async def on_ready():

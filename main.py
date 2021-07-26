@@ -50,7 +50,7 @@ async def blackjack(context):
   while len(dealerCards) != 2:
       dealerCards.append(random.randint(1,11))
       if len(dealerCards) == 2:
-          await context.send('Dealer has: ' +str(dealerCards[0])+' & X')
+          await context.send('Walter has: ' +str(dealerCards[0])+' & X')
 
   while len(playerCards) != 2:
       playerCards.append(random.randint(1,11))
@@ -67,22 +67,24 @@ async def blackjack(context):
     elif message.content.lower() == 'stand':
       while(sumList(dealerCards) < 17):
         dealerCards.append(random.randint(1,11))
-        await context.send('The dealer has a total of '+str(sumList(dealerCards))+' with '+stateCards(dealerCards))
-      await context.send('The dealer has a total of ' + str(sumList(dealerCards)))
+        await context.send('Walter has a total of '+str(sumList(dealerCards))+' with '+stateCards(dealerCards))
+      await context.send('Walter has a total of ' + str(sumList(dealerCards)))
       await context.send('You have a total of '+ str(sumList(playerCards))+' with ' + stateCards(playerCards))
       if sumList(dealerCards) > sumList(playerCards) and sumList(dealerCards) <= 21:
-        await context.send('Dealer wins')
+        await context.send('Walter wins')
         break
+      elif sumList(dealerCards) == sumList(playerCards) and sumList(dealerCards) <= 21:
+        await context.send('Issa draw!')
       else:
         await context.send('You win!')
         break
   if sumList(dealerCards) == 21:
-      await context.send('Dealer has: ' + str(dealerCards[0]) + ' & ' + str(dealerCards[1]))
-      await context.send("Dealer has 21 and wins!")
+      await context.send('Walter has: ' + str(dealerCards[0]) + ' & ' + str(dealerCards[1]))
+      await context.send("Walter has 21 and wins!")
   elif sumList(dealerCards) > 21:
-      await context.send("Dealer has busted!")
+      await context.send("Walter has busted!")
   if sumList(playerCards) > 21:
-    await context.send('You bust. Dealer wins.')
+    await context.send('You bust. Walter wins.')
   elif sumList(playerCards) == 21:
     await context.send('You have blackjack! You win!')
 

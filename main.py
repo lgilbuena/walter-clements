@@ -57,11 +57,6 @@ async def blackjack(context):
       if len(playerCards) == 2:
           await context.send('You have: '+str(playerCards[0])+' & '+str(playerCards[1])+' ('+str(sumList(playerCards))+')')
 
-  if sumList(dealerCards) == 21:
-      await context.send('Dealer has: ' + str(dealerCards[0]) + ' & ' + str(dealerCards[1]))
-      await context.send("Dealer has 21 and wins!")
-  elif sumList(dealerCards) > 21:
-      await context.send("Dealer has busted!")
   
   while sumList(playerCards) < 21:
     await context.send('Hit or stand?')
@@ -81,6 +76,11 @@ async def blackjack(context):
       else:
         await context.send('You win!')
         break
+  if sumList(dealerCards) == 21:
+      await context.send('Dealer has: ' + str(dealerCards[0]) + ' & ' + str(dealerCards[1]))
+      await context.send("Dealer has 21 and wins!")
+  elif sumList(dealerCards) > 21:
+      await context.send("Dealer has busted!")
   if sumList(playerCards) > 21:
     await context.send('You bust. Dealer wins.')
   elif sumList(playerCards) == 21:

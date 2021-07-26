@@ -73,6 +73,7 @@ async def blackjack(context):
       if sumList(dealerCards) <= 21 and sumList(playerCards) <= 21:
           if sumList(dealerCards) == sumList(playerCards):
               await context.send('Issa draw!')
+              break
           elif sumList(dealerCards) == 21:
               await context.send('Walter has: ' + str(dealerCards[0]) + ' & ' + str(dealerCards[1]))
               await context.send("Walter has 21 and wins!")

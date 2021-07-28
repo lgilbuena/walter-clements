@@ -113,7 +113,8 @@ async def on_message(message):
     elif "walter" in message.content.lower():
       await message.channel.send('walter')
     elif "silento" in message.content.lower():
-      await message.channel.send("<:_1_:793687054453833739>")
+      await message.channel.send("<:_1_:793687054453833739><:_2_:793687054683734027><:_3_:793687054780596255><:_4_:793687054915600384>")
+      await message.channel.send("<:_5_:793687054894628864><:_6_:793687055183380490><:_7_:793687054898692118><:_8_:793687054969470986>")
   await client.process_commands(message)
 
 

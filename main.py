@@ -112,6 +112,11 @@ async def on_message(message):
       await message.channel.send(trucks[0])
     elif "walter" in message.content.lower():
       await message.channel.send('walter')
+    elif "silento" in message.content.lower():
+      await message.channel.send(":_1_: :_2_: :_3_: :_4_:")
+      await message.channel.send(":_5_: :_6_: :_7_: :_8_:")
+      await message.channel.send(":_9_: :_10_: :_11_: :_12_:")
+      await message.channel.send(":_13_: :_14_: :_15_: :_16_:")
   await client.process_commands(message)
 
 

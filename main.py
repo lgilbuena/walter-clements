@@ -112,8 +112,7 @@ async def on_message(message):
       await message.channel.send(trucks[0])
     elif "walter" in message.content.lower():
       await message.channel.send('walter')
-    elif "silento" in message.content.lower():
-      await message.delete()
+    if random.randint(0,1000000) == 420:
       await message.channel.send("<:_1_:793687054453833739><:_2_:793687054683734027><:_3_:793687054780596255><:_4_:793687054915600384>")
       await message.channel.send("<:_5_:793687054894628864><:_6_:793687055183380490><:_7_:793687054898692118><:_8_:793687054969470986>")
       await message.channel.send("<:_9_:793687054915076096><:_10_:793687055140913192><:_11_:793687054960951317><:_12_:793687054964883488>")

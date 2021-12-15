@@ -1,10 +1,4 @@
 import csv
-def getID(user):
-    with open("users.csv","r") as f:
-        reader = csv.reader(f)
-        for x in reader:
-            if str(user) in x:
-                return x[0]
 def games(ID):
     with open("users.csv","r") as f:
         reader = csv.reader(f)
@@ -36,14 +30,6 @@ def balance(ID):
             if str(ID) in x:
                 return int(x[4])
 def checker(user):
-    with open("users.csv","r") as f:
-        reader = csv.reader(f)
-        for row in reader:
-
-            if user in row:
-                return True
-        return False
-def usernameChecker(user):
     with open("users.csv","r") as f:
         reader = csv.reader(f)
         for row in reader:

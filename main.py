@@ -17,17 +17,12 @@ cardType = ['Hearts','Diamonds','Spades','Clubs']
 playingBlackjack = False
 hits = False
 @client.command(name='record')
-async def give(context,username,amount):
-  cs.giveCoin(cs.getID(username),amount)
-  cs.giveCoin(context.author.id,-1 * amount)
-  await context.message.channel.send('{} gave {} {} uwucoins.'.format(cs.username(context.author.id),username,amount))
-@client.command(name='record')
 async def record(context):
   await context.message.channel.send('Username: {}'.format(cs.username(context.author.id)))
   await context.message.channel.send('{} wins and {} losses in blackjack. ({} win ratio) '.format(cs.wins(context.author.id),cs.losses(context.author.id),round(cs.wins(context.author.id)/cs.games(context.author.id),2)))
 @client.command(name='register')
 async def register(context,username):
-    if cs.checker(str(context.author.id)) and cs.usernameChecker(username):
+    if cs.checker(str(context.author.id)):
         await context.message.channel.send("You sussy baka. You already registered a username with your discord account.")
     else:
         cs.write([context.author.id,username]+[0,0,1000])

@@ -16,6 +16,11 @@ cardNum = ['A','2','3','4','5','6','7','8','9','J','Q','K']
 cardType = ['Hearts','Diamonds','Spades','Clubs']
 playingBlackjack = False
 hits = False
+@client.command(name='give')
+async def give(context,user,amount):
+  cs.giveCoin(cs.getID(user),  int(amount) )
+  cs.giveCoin(context.author.id,-1 * int(amount) )
+  await context.message.channel.send('{} has given {} {} uwucoins.'.format(cs.username(context.author.id),user,amount))
 @client.command(name='record')
 async def record(context):
   await context.message.channel.send('Username: {}'.format(cs.username(context.author.id)))

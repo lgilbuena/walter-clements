@@ -1,4 +1,10 @@
 import csv
+def getID(username):
+    with open("users.csv","r") as f:
+        reader = csv.reader(f)
+        for x in reader:
+            if username in x:
+                return int(x[0])
 def games(ID):
     with open("users.csv","r") as f:
         reader = csv.reader(f)
@@ -79,6 +85,6 @@ if __name__ == '__main__':
     print(checker('53'))
     print(balance(23))
     giveCoin(3302264395038195712, 6)
-    print(balance(3302264395038195712))
+    print(getID('MJ'))
 
 

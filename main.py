@@ -3,7 +3,8 @@ from discord import player
 from discord.ext import commands
 import os
 import random
-
+import csvwrite as cs
+import time
 from discord.ext.commands.core import check
 
 client = commands.Bot(command_prefix = '#')
@@ -15,7 +16,18 @@ cardNum = ['A','2','3','4','5','6','7','8','9','J','Q','K']
 cardType = ['Hearts','Diamonds','Spades','Clubs']
 playingBlackjack = False
 hits = False
-
+@client.command(name='record')
+async def record(context):
+  await context.message.channel.send('Username: {}'.format(cs.username(context.author.id)))
+  await context.message.channel.send('{} wins and {} losses in blackjack. ({} win ratio) '.format(cs.wins(context.author.id),cs.losses(context.author.id),round(cs.wins(context.author.id)/cs.games(context.author.id),2)))
+@client.command(name='register')
+async def register(context,username):
+    if cs.checker(str(context.author.id)):
+        await context.message.channel.send("You sussy baka. You already registered a username with your discord account.")
+    else:
+        cs.write([context.author.id,username]+[0,0,1000])
+        await context.message.channel.send("https://cdn.discordapp.com/attachments/800454220679479309/920581571260583936/Screen_Shot_2016_11_17_at_10.png")
+        await context.message.channel.send("Welcome to the dark side.")
 @client.command(name='walterball')
 async def walterball(context,question):
   await context.message.channel.send(walterBall[random.randint(0,len(walterBall))])
@@ -26,9 +38,12 @@ async def roll(context, number):
 async def hit(context):
   if playingBlackjack == True:
     hits = True
-
+@client.command(name='balance')
+async def uwucoin(context):
+    if cs.checker(str(context.author.id)):
+        await context.message.channel.send("{}, you have {} uwucoins.".format(cs.username(context.author.id),cs.balance(context.author.id)))
 @client.command(name='blackjack')
-async def blackjack(context):
+async def blackjack(context,uwucoin=None):
   dealerCards = []
   playerCards = []
   def check(m):
@@ -45,52 +60,75 @@ async def blackjack(context):
               outLine += str(deck[x])
           else:outLine += str(deck[x]) + ", "
       return outLine
-
-
-  while len(dealerCards) != 2:
-      dealerCards.append(random.randint(1,11))
-      if len(dealerCards) == 2:
-          await context.send('Walter has: ' +str(dealerCards[0])+' & X')
-
-  while len(playerCards) != 2:
-      playerCards.append(random.randint(1,11))
-      if len(playerCards) == 2:
-          await context.send('You have: '+str(playerCards[0])+' & '+str(playerCards[1])+' ('+str(sumList(playerCards))+')')
-
-  
-  while sumList(playerCards) < 21:
-    await context.send('Hit or stand?')
-    message = await client.wait_for('message',check=check)
-    if message.content.lower() == 'hit':
-      playerCards.append(random.randint(1,11))
-      await context.send('You now have a total of ' + str(sumList(playerCards)) + ' from these cards: ' + stateCards(playerCards))
-    elif message.content.lower() == 'stand':
-      while(sumList(dealerCards) < 17):
+  if uwucoin == None:
+        await context.send('You need to bet an amount.')
+  elif int(uwucoin) > cs.balance(context.author.id):
+        await context.send('You\'re betting more than you can afford!')
+  elif int(uwucoin) <= 0:
+        await context.send('Don\'t even try that.')
+  elif cs.checker(str(context.author.id)):
+    while len(dealerCards) != 2:
         dealerCards.append(random.randint(1,11))
-        await context.send('Walter has a total of '+str(sumList(dealerCards))+' with '+stateCards(dealerCards))
-      await context.send('Walter has a total of ' + str(sumList(dealerCards)))
-      await context.send('You have a total of '+ str(sumList(playerCards))+' with ' + stateCards(playerCards))
-      if sumList(dealerCards) <= 21 and sumList(playerCards) <= 21:
-          if sumList(dealerCards) == sumList(playerCards):
-              await context.send('Issa draw!')
-              break
-          elif sumList(dealerCards) == 21:
-              await context.send('Walter has: ' + str(dealerCards[0]) + ' & ' + str(dealerCards[1]))
-              await context.send("Walter has 21 and wins!")
-              break
-          elif sumList(dealerCards) > sumList(playerCards):
-              await context.send('Walter wins')
-              break
-          else:
-              await context.send('You win!')
-              break
-      elif sumList(dealerCards) > 21:
-          await context.send('Walter has busted!')
-          break
-  if sumList(playerCards) == 21:
-    await context.send('You win! You have blackjack!')
-  elif sumList(playerCards) > 21:
-    await context.send('You have busted!')      
+        if len(dealerCards) == 2:
+            await context.send('Walter has: ' +str(dealerCards[0])+' & X')
+
+    while len(playerCards) != 2:
+        playerCards.append(random.randint(1,11))
+        if len(playerCards) == 2:
+            await context.send('You have: '+str(playerCards[0])+' & '+str(playerCards[1])+' ('+str(sumList(playerCards))+')')
+
+    
+    while sumList(playerCards) < 21:
+      await context.send('Hit or stand?')
+      message = await client.wait_for('message',check=check)
+      if message.content.lower() == 'hit':
+        playerCards.append(random.randint(1,11))
+        await context.send('You now have a total of ' + str(sumList(playerCards)) + ' from these cards: ' + stateCards(playerCards))
+      elif message.content.lower() == 'stand':
+        while(sumList(dealerCards) < 17):
+          dealerCards.append(random.randint(1,11))
+          await context.send('Walter has a total of '+str(sumList(dealerCards))+' with '+stateCards(dealerCards))
+        await context.send('Walter has a total of ' + str(sumList(dealerCards)))
+        await context.send('You have a total of '+ str(sumList(playerCards))+' with ' + stateCards(playerCards))
+        if sumList(dealerCards) <= 21 and sumList(playerCards) <= 21:
+            if sumList(dealerCards) == sumList(playerCards):
+                await context.send('Issa draw!')
+                break
+            elif sumList(dealerCards) == 21:
+                await context.send('Walter has: ' + str(dealerCards[0]) + ' & ' + str(dealerCards[1]))
+                await context.send("Walter has 21 and wins!")
+                cs.giveCoin(context.author.id, -1 * int(uwucoin))
+                await context.send('You lose {} uwucoins!'.format(uwucoin))
+                cs.addWin(context.author.id, 0)  
+                break
+            elif sumList(dealerCards) > sumList(playerCards):
+                await context.send('Walter wins')
+                cs.giveCoin(context.author.id, -1 * int(uwucoin))
+                await context.send('You lose {} uwucoins!'.format(uwucoin))
+                cs.addWin(context.author.id, 0)  
+                break
+            else:
+                await context.send('You win!')
+                cs.giveCoin(context.author.id, 1 * int(uwucoin))
+                await context.send('You win {} uwucoins!'.format(2*int(uwucoin)))
+                cs.addWin(context.author.id, 1)  
+                break
+        elif sumList(dealerCards) > 21:
+            await context.send('Walter has busted!')
+            cs.giveCoin(context.author.id, 1 * int(uwucoin))
+            await context.send('You win {} uwucoins!'.format(2*int(uwucoin)))
+            cs.addWin(context.author.id, 1)  
+            break
+    if sumList(playerCards) == 21:
+      await context.send('You win! You have blackjack!')
+      cs.giveCoin(context.author.id, 1 * int(uwucoin))
+      await context.send('You win {} uwucoins!'.format(2*int(uwucoin)))
+      cs.addWin(context.author.id, 1)  
+    elif sumList(playerCards) > 21:
+      await context.send('You have busted!')
+      cs.giveCoin(context.author.id, -1 * int(uwucoin))
+      await context.send('You lose {} uwucoins!'.format(uwucoin))  
+      cs.addWin(context.author.id, 0)    
 
 @client.event
 async def on_ready():

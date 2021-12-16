@@ -80,11 +80,3 @@ def write(user):
     with open("users.csv","a",newline='') as f:
         writer = csv.writer(f)
         writer.writerow(user)
-
-if __name__ == '__main__':
-    print(checker('53'))
-    print(balance(23))
-    giveCoin(3302264395038195712, 6)
-    print(getID('MJ'))
-
-

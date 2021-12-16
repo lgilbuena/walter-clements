@@ -64,7 +64,7 @@ async def blackjack(context,uwucoin=None):
           if x == len(deck)-1:
               outLine += str(deck[x])
           else:outLine += str(deck[x]) + ", "
-      return outLine
+      return outLinem
   if uwucoin == None:
         await context.send('You need to bet an amount.')
   elif int(uwucoin) > cs.balance(context.author.id):

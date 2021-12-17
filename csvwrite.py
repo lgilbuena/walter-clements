@@ -1,4 +1,13 @@
 import csv
+def leaderboards():
+    numUsers = 0
+    users = list()
+    with open("users.csv","r") as f:
+        reader = csv.reader(f)
+        for x in reader:
+            users.append([x[1],x[4]])
+            numUsers += 1
+    return users
 def getID(username):
     with open("users.csv","r") as f:
         reader = csv.reader(f)
@@ -80,3 +89,11 @@ def write(user):
     with open("users.csv","a",newline='') as f:
         writer = csv.writer(f)
         writer.writerow(user)
+
+if __name__ == '__main__':
+    print(checker('53'))
+    print(balance(23))
+    giveCoin(3302264395038195712, 6)
+    print(getID('MJ'))
+
+

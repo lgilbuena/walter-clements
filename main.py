@@ -6,6 +6,7 @@ import random
 import csvwrite as cs
 import time
 from discord.ext.commands.core import check
+import sorting as sort
 
 client = commands.Bot(command_prefix = '#')
 responses = ['walter', 'i like fire trucks', 'i like moster trucks', 'i like fire trucks and moster trucks']
@@ -16,6 +17,17 @@ cardNum = ['A','2','3','4','5','6','7','8','9','J','Q','K']
 cardType = ['Hearts','Diamonds','Spades','Clubs']
 playingBlackjack = False
 hits = False
+
+@client.command(name='shop')
+async def shop(context):
+  message = "this message is sent via DM"
+  await context.author.send(message)
+@client.command(name='leaderboard')
+async def leaderboard(context):
+  userList = cs.leaderboards()
+  sortedList = sort.sorting(userList)
+  fortmat = sort.formats(sortedList)
+  await context.message.channel.send('``` {} ```'.format(fortmat))
 @client.command(name='give')
 async def give(context,user,amount):
   cs.giveCoin(cs.getID(user),  int(amount) )
@@ -126,8 +138,8 @@ async def blackjack(context,uwucoin=None):
             break
     if sumList(playerCards) == 21:
       await context.send('You win! You have blackjack!')
-      cs.giveCoin(context.author.id, 1 * int(uwucoin))
-      await context.send('You win {} uwucoins!'.format(2*int(uwucoin)))
+      cs.giveCoin(context.author.id, 1.5 * int(uwucoin))
+      await context.send('You win {} uwucoins!'.format(2.5*int(uwucoin)))
       cs.addWin(context.author.id, 1)  
     elif sumList(playerCards) > 21:
       await context.send('You have busted!')
@@ -163,4 +175,4 @@ async def on_message(message):
   await client.process_commands(message)
 
 
-client.run('ODY3OTA4MDkxNzMwMDY3NDg2.YPn8Zg.gIXF9-pJYieVZjKF5CzRR9Ug_ys')
+client.run('ODY3ODgzMzAxNjUzNDQ2Njc2.YPnlTw.Od_l5llKQy4jcREoNTpjp7KYYSI')

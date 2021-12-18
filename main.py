@@ -8,6 +8,7 @@ import time
 from discord.ext.commands.core import check
 import sorting as sort
 
+
 client = commands.Bot(command_prefix = '#')
 responses = ['walter', 'i like fire trucks', 'i like moster trucks', 'i like fire trucks and moster trucks']
 trucks = ['https://gph.is/g/EGyJx5o','http://gph.is/1UTFMB3']
@@ -138,7 +139,7 @@ async def blackjack(context,uwucoin=None):
             break
     if sumList(playerCards) == 21:
       await context.send('You win! You have blackjack!')
-      cs.giveCoin(context.author.id, 1.5 * int(uwucoin))
+      cs.giveCoin(context.author.id, int(round(1.5 * int(uwucoin))))
       await context.send('You win {} uwucoins!'.format(2.5*int(uwucoin)))
       cs.addWin(context.author.id, 1)  
     elif sumList(playerCards) > 21:

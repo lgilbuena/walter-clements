@@ -149,7 +149,7 @@ async def blackjack(context,uwucoin=None):
       await context.send('You lose {} uwucoins!'.format(uwucoin))  
       cs.addWin(context.author.id, 0)    
       
-@client.command(name='roll')
+@client.command(name='assign')
 async def makematch(context):
     while len(listOfPlayers) != 0:
         randomIndex = random.randint(0,len(types)-1)

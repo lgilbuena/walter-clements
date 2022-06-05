@@ -7,7 +7,8 @@ import csvwrite as cs
 import time
 from discord.ext.commands.core import check
 import sorting as sort
-
+types = ['Normal','Fire','Water','Grass','Electric','Ice','Fighting','Poison','Ground','Flying','Psychic','Bug','Rock','Ghost','Dark','Dragon','Steel','Fairy']
+listOfPlayers = []
 
 client = commands.Bot(command_prefix = '#')
 responses = ['walter', 'i like fire trucks', 'i like moster trucks', 'i like fire trucks and moster trucks']
@@ -147,6 +148,24 @@ async def blackjack(context,uwucoin=None):
       cs.giveCoin(context.author.id, -1 * int(uwucoin))
       await context.send('You lose {} uwucoins!'.format(uwucoin))  
       cs.addWin(context.author.id, 0)    
+      
+@client.command(name='roll')
+async def makematch(context):
+    while len(listOfPlayers) != 0:
+        randomIndex = random.randint(0,len(types)-1)
+        randomPlayer = random.randint(0,len(listOfPlayers)-1)
+        await context.send(str(listOfPlayers[randomPlayer]) + ': ' + str(types[randomIndex]))
+        types.remove(types[randomIndex])
+        listOfPlayers.remove(listOfPlayers[randomPlayer])
+    await context.send('done.')
+
+@client.command(name='join')
+async def makematch(context):
+    if '<@'+str(context.author.id)+'>' in listOfPlayers:
+        await context.send('You already registered idiot.')
+    else:
+        listOfPlayers.append('<@'+str(context.author.id)+'>')
+        await context.send('<@'+str(context.author.id)+'>' + ' has registered.')
 
 @client.event
 async def on_ready():

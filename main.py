@@ -8,7 +8,7 @@ import time
 from discord.ext.commands.core import check
 import sorting as sort
 types = ['Normal','Fire','Water','Grass','Electric','Ice','Fighting','Poison','Ground','Flying','Psychic','Bug','Rock','Ghost','Dark','Dragon','Steel','Fairy']
-listOfPlayers = []
+listOfPlayers = ['<@302264395038195712>','<@187701360915906560>','<@211640631603232769>']
 
 client = commands.Bot(command_prefix = '#')
 responses = ['walter', 'i like fire trucks', 'i like moster trucks', 'i like fire trucks and moster trucks']

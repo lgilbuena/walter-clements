@@ -166,6 +166,10 @@ async def makematch(context):
     else:
         listOfPlayers.append('<@'+str(context.author.id)+'>')
         await context.send('<@'+str(context.author.id)+'>' + ' has registered.')
+        
+@client.command(name='list')
+async def list(context):
+  await context.send(listOfPlayers)
 
 @client.event
 async def on_ready():
